@@ -144,12 +144,12 @@ const updateEmployeeRole = async () => {
     if (err) {
       console.log(err);
     }
-  
+
     const employeeList = []
 
-   for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       employeeList.push(`${data[i].id}`)
-   }
+    }
 
     const answer = await inquirer.prompt([
       {
@@ -164,19 +164,18 @@ const updateEmployeeRole = async () => {
         message: 'What is the updated role id?',
       }
     ])
-  
+
     const updateSql = `UPDATE employee SET role_id = ? WHERE id = ?`
     const params = [answer.role_id, answer.employee]
 
     db.query(updateSql, params, (err, result) => {
       if (err) {
         console.log(err);
-      } 
-      console.log('Role has been updated!')  
+      }
+      console.log('Role has been updated!')
+      menuPrompt()
     });
   })
-  
-  menuPrompt()
 }
 
 // const deleteMenu = async () => {
